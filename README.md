@@ -34,7 +34,7 @@ Features:
 ### Cloning the repository
 
 ```shell
-gh repo clone rahulsz/ai-saas
+https://github.com/rahulsz/ai-saas.git
 ```
 
 ### Install packages
