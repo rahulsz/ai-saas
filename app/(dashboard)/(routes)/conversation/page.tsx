@@ -21,11 +21,13 @@ import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { useProModal } from "@/hooks/use-pro-modal";
 
 
 
 
 const ConversationPage = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
 
@@ -53,8 +55,13 @@ const ConversationPage = () => {
 
       form.reset();
     } catch (error: any) {
-      // TODO : Open Pro Modal
+       if(error?.response?.status === 403){
+          proModal.onOpen();
+       }
       console.log(error);
+    }
+    finally {
+      router.refresh();
     }
   };
   return (
